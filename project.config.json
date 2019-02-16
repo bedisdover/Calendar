@@ -1,0 +1,34 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"nodeModules": true
+	},
+	"miniprogramRoot": "dist/wx/",
+	"compileType": "miniprogram",
+	"appid": "wxddfdb83a7025227a",
+	"projectname": "calendar",
+	"condition": {
+		"search": {
+			"initial": -1,
+			"list": []
+		},
+		"conversation": {
+			"initial": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"initial": -1,
+			"list": []
+		}
+	}
+}

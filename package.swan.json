@@ -1,0 +1,12 @@
+{
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": false
+  },
+  "condition": {
+    "swan": {
+      "initial": -1,
+      "list": []
+    }
+  }
+}
