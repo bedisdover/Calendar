@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { today } from '@/utils/configMoment'
+import { today } from 'utils/configMoment'
 
 export default {
   name: 'date',

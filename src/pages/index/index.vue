@@ -2,36 +2,44 @@
   <div class="container">
     <header>
       <div>
-        <div class="item-container">
-          <span v-for="(day, index) in days" :key="index" class="day">{{ day }}</span>
-        </div>
+        <div class="date">3月31日</div>
+        <div class="extra">2019 5天后</div>
       </div>
+      <div class="operation">
+        <span class="iconfont icon-plus" @click="add"></span>
+        <span class="iconfont icon-list" @click="list"></span>
+      </div>
+    </header>
+
+    <div class="calendar">
+      <div class="days-container">
+        <span v-for="(day, index) in days" :key="index" class="day">{{ day }}</span>
+      </div>
+
       <swiper
         :circular="true"
         :class="mode"
         :current="weekIndex"
         @change="handleSlideWeek">
         <swiper-item v-for="(week, index) in weeks" :key="index">
-          <div>
-            <div class="item-container date-container">
-              <div
-                v-for="(date, $index) in week"
-                :key="$index"
-                class="date"
-                @click="handleClick"
-                :data-date="date.value"
-                :class="{
+          <div class="date-container">
+            <div
+              v-for="(date, $index) in week"
+              :key="$index"
+              class="date"
+              @click="handleClick"
+              :data-date="date.value"
+              :class="{
                   current: date.value === currentDate,
                   today: date.value === today
                 }">
-                <span class="text">{{ date.text }}</span>
-                <span class="lunar">{{ date.lDate }}</span>
-              </div>
+              <span class="text">{{ date.text }}</span>
+              <span class="lunar">{{ date.lDate }}</span>
             </div>
           </div>
         </swiper-item>
       </swiper>
-    </header>
+    </div>
 
     <swiper
       :circular="true"
@@ -69,9 +77,9 @@
 </template>
 
 <script>
-import moment, { today } from '@/utils/configMoment'
-import lunar from '@/utils/lunar'
-import date from '@/components/date'
+import moment, { today } from 'utils/configMoment'
+import lunar from 'utils/lunar'
+import date from 'components/date'
 
 export default {
   components: {
@@ -217,40 +225,55 @@ export default {
   .container {
     display: flex;
     flex-direction: column;
-    background: $grey;
+    background: $bg_color;
     height: 100vh;
     overflow: hidden;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    /*<!--font-size: $font_size;-->*/
 
-    & ._header {
+    & > ._header {
+      display: flex;
+      justify-content: space-between;
       background: $white;
       padding: $sec_padding;
       box-shadow: $grey 0 1px 2px;
 
-      & .item-container {
+      & .date {
+        /*font-size: 1.5em;*/
+      }
+
+      & .extra {
+        /*font-size: .8rem;*/
+        color: $grey_text;
+      }
+
+      & > .operation {
+        display: flex;
+      }
+    }
+
+    & > .calendar {
+      background: $white;
+      padding: $sec_padding;
+
+      & > .days-container {
         display: flex;
         justify-content: space-between;
-        width: $container_width;
 
-        & .day {
+        & > .day {
           font-size: .8em;
-          color: $font_color;
+          color: $grey_text;
           width: calc(100% / 7);
           text-align: center;
         }
       }
 
-      & ._swiper.single {
-        height: $item_size;
-      }
-
-      /*& ._swiper.multi {*/
-      /*height: ;*/
-      /*}*/
-
       & .date-container {
+        display: flex;
+        justify-content: space-between;
         height: $item_size;
 
-        & .date {
+        & > .date {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -259,26 +282,35 @@ export default {
           border: solid $border_size #fff;
           border-radius: $border_radius;
 
+          & > .lunar {
+            font-size: .5em;
+            color: $grey_text;
+            margin: 0;
+          }
+
           &.current {
-            background: $grey;
-            border-color: $grey;
+            background: $current_date_bg_color;
+            border-color: $current_date_bg_color;
           }
 
           &.today {
-            background: $red;
-            border-color: $red;
-          }
-
-          & .lunar {
-            font-size: .5em;
-            color: #999;
-            margin: 0;
+            background: $today_bg_color;
+            border-color: $today_bg_color;
+            color: $white;
           }
         }
       }
     }
 
-    & .content {
+    & ._swiper.single {
+      height: $item_size;
+    }
+
+    /*& ._swiper.multi {*/
+    /*height: ;*/
+    /*}*/
+
+    & > .content {
       flex: 1;
 
       & ._scroll-view {
